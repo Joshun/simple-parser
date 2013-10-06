@@ -22,3 +22,5 @@
 Where '*fp' is a file pointer of an already open file, 'key' is the key to search for and retrieve, 'value_store' is a
 variable in which to store the retrieved value, and 'occurrence' is the numbered occurrence to retrieve. It returns 1 (TRUE)
 on retrieving a key, and 0 (FALSE) on failing to do so.
+
+Currently, any spaces found in the config file will be stripped.
