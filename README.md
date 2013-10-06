@@ -5,7 +5,7 @@
     key1=value1
     key2=value2
 
-## Multiple keys with the same name can be distinguished by specifying a different occurence, e.g.:
+## Multiple keys with the same name can be distinguished by specifying a different occurrence, e.g.:
 
     # Setup section 1
     mykey=value1
