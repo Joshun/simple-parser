@@ -9,7 +9,7 @@
 int check_char(char *str, int *pos);
 int check_key(const char *src, const char *compare, const char strip);
 int sep_key(char *src, char *split, char sep);
-int retrieve_key_value(FILE *fp, char *key, char *value_store);
+int retrieve_key_value(FILE *fp, char *key, char *value_store, int occurrence);
 
 /* An example main program */
 int main()
@@ -22,9 +22,9 @@ int main()
 	}
 	char value[1000];
 	char value2[1000];
-	retrieve_key_value(test_fp, "joshun", value);
+	retrieve_key_value(test_fp, "joshun", value, 1);
 	printf("Value: %s\n", value);
-	retrieve_key_value(test_fp, "noom", value2);
+	retrieve_key_value(test_fp, "noom", value2, 2);
 	printf("Value: %s\n", value2);
 	//printf("%d\n", check_key("hell=5", "hello", '='));
 	fclose(test_fp);
@@ -118,11 +118,12 @@ int sep_key(char *src, char *split, char sep)
 		return 0;
 }
 
-int retrieve_key_value(FILE *fp, char *key, char *value_store)
+int retrieve_key_value(FILE *fp, char *key, char *value_store, int occurrence)
 {
 
 	char buffer[BUFFER_SIZE] = { 0 };
 	char buffer2[BUFFER_SIZE] = { 0 };
+	int count = 0;
 	int position = 0;
 	int base = 0;
 
@@ -143,9 +144,12 @@ int retrieve_key_value(FILE *fp, char *key, char *value_store)
 		if( check_key(buffer2, key, CHAR_TO_STRIP ) )
 		{
 			printf("Key %s found\n", key);
-			sep_key(buffer2, value_store, CHAR_TO_STRIP);
-			printf("Contents of key: %s\n", value_store);
-			return 1;
+			count++;
+			if( count == occurrence ) {
+				sep_key(buffer2, value_store, CHAR_TO_STRIP);
+				printf("Contents of key: %s\n", value_store);
+				return 1;
+			}
 		}			
 		
 		memset(buffer2, '\0', sizeof(buffer));
