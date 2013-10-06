@@ -54,6 +54,9 @@ int check_char(char *str, int *pos)
 			*pos = *pos + 1;
 			return 1;
 			break;
+		case '\n':
+			str[*pos] = '\0';
+			return 1;
 		case '\0':
 		case EOF:
 			//printf("NULL or EOF\n");
@@ -110,8 +113,6 @@ int sep_key(char *src, char *split, char sep)
 			//check_char(src, &pos);
 			pos++;
 			split[i] = src[pos];
-			if( split[i] == '\n' )
-				split[i] = '\0';
 		}
 		split[i + 1] = '\0';
 		return 1;
