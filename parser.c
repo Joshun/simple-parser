@@ -55,8 +55,6 @@ int check_char(char *str, int *pos)
 			return 1;
 			break;
 		case '\n':
-			str[*pos] = '\0';
-			return 1;
 		case '\0':
 		case EOF:
 			//printf("NULL or EOF\n");
@@ -155,10 +153,10 @@ int retrieve_key_value(FILE *fp, char *key, char *value_store, int occurrence)
 			}
 		}			
 		
-		memset(buffer2, '\0', sizeof(buffer));
+		memset(buffer, '\0', sizeof(buffer));
 		memset(buffer2, '\0', sizeof(buffer2));
 
 	}
-	
+	value_store[0] = '\0';
 	return 0;
 }
